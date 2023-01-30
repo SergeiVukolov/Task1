@@ -1,38 +1,48 @@
 
+import com.beust.ah.A;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.testng.internal.Yaml;
 import org.testng.internal.YamlParser;
 
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class Json {
 
+
     public static void main(String[] args) throws IOException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        File readjson = new File("Data/admin_users.json");
-        List json1 = objectMapper.readValue(readjson, List.class);
-        System.out.println(json1);
+        //Parser.pathFile = "Data/admin_users.json";
+        List admin_users_json = Parser.getList("Data/admin_users.json");
+        List admin_users_yaml = Parser.getList1("Data/admin_users.yaml");
+        List regular_users_json = Parser.getList("Data/regular_users.json");
+        List regular_users_yaml = Parser.getList1("Data/regular_users.yaml");
 
-        ObjectMapper objectMapper1 = new ObjectMapper(new YAMLFactory());
-        List yaml1 = objectMapper1.readValue(new File("Data/admin_users.yaml"), List.class);
-        System.out.println(yaml1);
+        Assert.assertTrue(admin_users_yaml.containsAll(admin_users_json), "Admin_users.yaml doesn't contain Admin_users.json");
+        Assert.assertTrue(regular_users_yaml.containsAll(regular_users_json), "Regular_users.yaml contains Regular_users.json");
 
-        ObjectMapper objectMapper2 = new ObjectMapper();
-        File readjson1 = new File("Data/regular_users.json");
-        List json2 = objectMapper2.readValue(readjson1, List.class);
-        System.out.println(json2);
 
-        ObjectMapper objectMapper3 = new ObjectMapper(new YAMLFactory());
-        List yaml2 = objectMapper3.readValue(new File("Data/regular_users.yaml"), List.class);
-        System.out.println(yaml2);
+
+
+//        for (int i=0;i < users.size()-1;i++){
+//           LinkedHashMap user = (LinkedHashMap) users.get(i);
+//            List<Users> listValues = new ArrayList<Users>(user.values());
+//            int id = (int) ((LinkedHashMap) ((ArrayList) users).get(0)).get("id");
+//            String name = (String) ((LinkedHashMap) ((ArrayList) users).get(0)).get("name");
+//            int a=1;
+
+
+
+
+
 
 
     }

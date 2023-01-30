@@ -1,9 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Users {
  private int id;
  private String name;
-
- public Users() {
- }
 
  public int getId() {
   return id;
